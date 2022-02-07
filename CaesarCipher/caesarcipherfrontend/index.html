@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caesar Cipher</title>
+</head>
+<body>
+    
+    <div id="demo">
+        <h2>Caesar Cipher</h2>
+        <input type="text" id="messageEncipher" placeholder="message for enciphering">
+        <input type="number" id="keyEncipher" placeholder="key for enciphering">
+        <br> <br>
+        <input type="text" id="messageDecipher" placeholder="message for deciphering">
+        <input type="number" id="keyDecipher" placeholder="key for deciphering">
+        <br> <br>
+        <button type="button" onclick="loadEncipher()">Encipher</button>
+        <br> <br>
+        <button type="button" onclick="loadDecipher()">Decipher</button>
+        <br> <br>
+        <input type="text" id="breaking" placeholder="message for breaking">
+        <br> <br>
+        <button type="button" onclick="breakCipher()">Break cipher</button>
+    </div>
+
+<script>
+    function loadEncipher() {
+        
+        var messageEncipher = document.getElementById("messageEncipher").value;
+        var keyEncipher = document.getElementById("keyEncipher").value;
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function() {
+                
+            
+            alert("Enciphered message is " + this.responseText.toUpperCase());
+ 
+            }
+
+  xhttp.open("GET", "http://localhost:8080/encipher/" + messageEncipher + "/" + keyEncipher);
+  xhttp.send();
+}
+
+function loadDecipher() {
+
+    var messageDecipher = document.getElementById("messageDecipher").value;
+    var keyDecipher = document.getElementById("keyDecipher").value;
+    const xhttp = new XMLHttpRequest();
+    xhttp.onload = function() {
+                
+        alert( "Deciphered message is " + this.responseText.toUpperCase());
+ 
+        }
+    xhttp.open("GET", "http://localhost:8080/decipher/" + messageDecipher + "/" + keyDecipher);
+    xhttp.send();
+}
+
+function breakCipher() {
+
+    var breakCipher = document.getElementById("breaking").value;
+    const xhttp = new XMLHttpRequest();
+    xhttp.onload = function() {
+                
+        alert( "Original message is " + this.responseText.toUpperCase());
+ 
+        }
+    xhttp.open("GET", "http://localhost:8080/break/" + breakCipher );
+    xhttp.send();
+}
+
+</script>
+
+</body>
+</html>
